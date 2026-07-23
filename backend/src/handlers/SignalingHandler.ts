@@ -2,6 +2,7 @@ import { Server as SocketIOServer } from 'socket.io'
 
 export class SignalingHandler {
   private io: SocketIOServer
+  private peerConnections: Map<string, Set<string>> = new Map()
 
   constructor(io: SocketIOServer) {
     this.io = io
@@ -13,6 +14,7 @@ export class SignalingHandler {
       callId: data.callId,
       offer: data.offer,
     })
+    this.recordConnection(from, data.to)
   }
 
   handleAnswer(from: string, data: { to: string; callId: string; answer: any }): void {
@@ -29,5 +31,12 @@ export class SignalingHandler {
       callId: data.callId,
       candidate: data.candidate,
     })
+  }
+
+  private recordConnection(userId1: string, userId2: string): void {
+    if (!this.peerConnections.has(userId1)) {
+      this.peerConnections.set(userId1, new Set())
+    }
+    this.peerConnections.get(userId1)!.add(userId2)
   }
 }
