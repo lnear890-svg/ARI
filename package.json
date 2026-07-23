@@ -1,0 +1,25 @@
+{
+  "name": "ari-monorepo",
+  "version": "1.0.0",
+  "description": "ARI - Automated Random Interaction / Adaptive Real-time Intercom",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend",
+    "shared"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspaces",
+    "build": "npm run build --workspaces",
+    "test": "npm run test --workspaces",
+    "lint": "npm run lint --workspaces"
+  },
+  "keywords": [
+    "random-call",
+    "webrtc",
+    "video-chat",
+    "voice-call",
+    "real-time"
+  ],
+  "license": "MIT"
+}
